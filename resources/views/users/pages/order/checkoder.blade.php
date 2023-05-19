@@ -60,9 +60,16 @@
                                     </div>
                                 </td>
                                 <td class="cart__total">$ {{$item->amount*$pro->price}}vnĐ</td>
+                                <td class="cart__total">
+                                @if ($item->genaral==2)
+                                 Đơn Đang Xử Lý
+                                @endif 
+                            
+                            </td>
                                 
                             </tr>
                             @endif 
+        
                             @endforeach
                             @endforeach
                         @endif

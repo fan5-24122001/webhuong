@@ -130,24 +130,18 @@
 
                         @if (Auth::user()->is_admin == 1)
                         <li>
-                            <a href="{{route('Product.list')}}">
-                                <i class="fas fa-chart-bar"></i>Data</a>
+                            <a href="{{route('admin.home')}}">
+                                <i class="fas fa-chart-bar"></i>Thống Kê</a>
 
                         <li>
                         <li>
-                            <a href="{{route('Product.list')}}">
-                                <i class="fas fa-chart-bar"></i>Ql Tk cửa hàng</a>
+                            <a href="{{route('User.list')}}">
+                                <i class="fas fa-chart-bar"></i>Ql Tk khách hàng hàng</a>
 
                         <li>
                         <li>
-                            <a href="{{route('Product.list')}}">
+                            <a href="{{route('User.listNV')}}">
                                 <i class="fas fa-chart-bar"></i>Ql Tk nhân viên</a>
-
-                        <li>
-                            @elseif(Auth::user()->is_admin == 2)
-                        <li>
-                            <a href="{{route('Product.list')}}">
-                                <i class="fas fa-chart-bar"></i>Data</a>
 
                         <li>
                         <li>
@@ -155,21 +149,19 @@
                                 <i class="fas fa-chart-bar"></i>Quản lý kho</a>
 
                         <li>
-
-
-                            @elseif(Auth::user()->is_admin == 3)
-                        <li>
-                            <a href="{{route('Product.list')}}">
-                                <i class="fas fa-chart-bar"></i>Data</a>
+                            @elseif(Auth::user()->is_admin == 2)
+                            <li>
+                            <a href="{{route('admin.home')}}">
+                                <i class="fas fa-chart-bar"></i>Thống Kê</a>
 
                         <li>
                         <li>
                             <a href="{{route('Product.list')}}">
-                                <i class="fas fa-chart-bar"></i>product</a>
+                                <i class="fas fa-chart-bar"></i>Sản Phẩm</a>
 
                         <li>
                             <a href="{{route('Category.list')}}">
-                                <i class="fas fa-map-marker-alt"></i>category</a>
+                                <i class="fas fa-map-marker-alt"></i>Danh Mục</a>
                         </li>
                         <li class="has-sub">
                             <a class="js-arrow" href="#">
@@ -184,6 +176,9 @@
 
                             </ul>
                         </li>
+
+                           
+                       
                         @endif
 
 

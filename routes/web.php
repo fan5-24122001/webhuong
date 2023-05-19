@@ -51,6 +51,11 @@ Route::group(['prefix' => 'admin'], function () {
     });
     Route::controller(UserController::class)->group(function () {
         Route::get('/list-user', 'list')->name('User.list');
+        Route::get('/list-nv', 'listNV')->name('User.listNV');
+        Route::get('/add', 'create')->name('User.add');
+        Route::post('/createuser', 'createuser')->name('User.createuser');
+        Route::get('/edit/{id}', 'edit')->name('User.edit');
+        Route::post('/update/{id}', 'update')->name('User.update');
 
         Route::get('/delete-user/{id}', 'Delete')->name('User.Delete');
     });
@@ -112,6 +117,7 @@ Route::POST('/postthanhtoan',[App\Http\Controllers\HomeController::class, 'postt
 Route::controller(HomeController::class)->group(function () {
 Route::get('/category/{id_category}','category')->name('category');
 Route::get('/addlove/{id_product}', 'addlove')->name('love');
+Route::DELETE('/deletelove/{id}','deletelove')->name('home.deletelove');
 Route::get('/show', 'listlove')->name('listlove');
 Route::get('/shop', 'shop')->name('shop');
 Route::post('/search', 'search')->name('search');

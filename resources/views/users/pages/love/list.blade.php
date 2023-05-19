@@ -51,7 +51,7 @@
                                 <td class="cart__price">${{$pro->price}}</td>
                                
                                 <td class="shoping__cart__item__close">
-                                    <form action="{{ route('home.deleteProduct', $item->id) }}" method="POST">
+                                    <form action="{{ route('home.deletelove', $item->id) }}" method="POST">
                                         @csrf
                                         @method('delete')
                                         <button type="submit" class="btn btn-outline-danger">Delete</button>

@@ -42,7 +42,7 @@ class ProductController extends Controller
         }
         $product->name = $request->name;
         $product->id_category = $request->id_category;
-        $product->amount = $request->amount;
+        $product->amount = 0;
         $product->description = $request->description;
         $product->price = $request->price;
         if (!empty($arrayImgae)) {

@@ -40,18 +40,6 @@
                             </div>
                             <div class="row form-group">
                                 <div class="col col-md-3">
-                                    <label for="text-input" class=" form-control-label">Số lượng</label>
-                                </div>
-                                <div class="col-12 col-md-9">
-                                    <input type="number" id="text-input" name="amount" placeholder="Nhập"
-                                        class="form-control">
-                                    @error('amount')
-                                        <div class="alert alert-danger">{{ $message }}</div>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="row form-group">
-                                <div class="col col-md-3">
                                     <label for="text-input" class=" form-control-label">Thông tin chi tiết</label>
                                 </div>
                                 <div class="col-12 col-md-9">

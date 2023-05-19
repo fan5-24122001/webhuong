@@ -92,7 +92,7 @@
                         <div class="label new">{{$item->name}}</div>
                         <ul class="product__hover">
                             <li><a href="" class="image-popup"><span class="arrow_expand"></span></a></li>
-                            <li><a href="#"><span class="icon_heart_alt"></span></a></li>
+                            <li><a href="{{ route('love',['id_user'=> Auth::user()->id,'id_product'=>$item->id ]) }}"><span class="icon_heart_alt"></span></a></li>
                           
                             <li><a href="{{ route('home.themcart', [Auth::user()->id,$item->id]) }}"><span class="fa fa-shopping-cart"></span></a></li>
                         </ul>
@@ -143,8 +143,7 @@
         </div>
     </div>
 </section>
-<!-- Product Section End -->
--- Banner Section Begin -->
+
 <section class="banner set-bg" data-setbg="users/img/banner/banner-1.jpg">
     <div class="container">
         <div class="row">

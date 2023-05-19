@@ -5,7 +5,7 @@
             <div class="container-fluid">
                 <div class="card">
                     <div class="card-header">
-                        <strong>Thêm thể loại</strong>
+                        <strong>Thêm Danh Sách Kho </strong>
                     </div>
                     <div class="card-body card-block">
                         <form action="{{ route('NhapXuatKho.EditPost', ['id'=>$NhapXuatKho->id]) }}" method="POST" enctype="multipart/form-data"
