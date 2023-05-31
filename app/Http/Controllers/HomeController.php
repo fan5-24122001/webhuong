@@ -217,7 +217,7 @@ class HomeController extends Controller
         $total = 0;
         $category = Category::all();
         $idUser = Auth::user()->id;
-        $cart = Cart::where('idUser', '=', $idUser)->get();
+        $cart = Cart::where('idUser', '=', $idUser)->where('genaral','=',1)->get();
         $products = Product::all();
         foreach ($cart as $car) {
             if ($car->idUser == $idUser) {
@@ -231,35 +231,41 @@ class HomeController extends Controller
                 }
             }
         }
-        $data = Cart::where('idUser', '=', $idUser)->get();
+        $data = Cart::where('idUser', '=', $idUser)->where('genaral','=',1)->get();
         return view('users.pages.cart.cart', compact('products', 'data', 'total', 'amount'));
     }
     public function postthanhtoan(createRequest $request)
     {
-        // dd($request->all());
-        if (
-            Bill::create([
-                'idUser' => Auth::user()->id,
-                'name' => $request->name,
-                'email' => $request->email,
-                'genaral' => 1,
-                'price' => $request->price,
-                'numberPhone' => $request->numberPhone,
-                'address' => "Số-Đường :" . $request->sonha . "/Xã :" . $request->xa . "/Huyện-Quận :" . $request->huyen . "/Tỉnh :" . $request->tinh
-            ])
-        ) {
-            $cartUser = Cart::where('idUser', '=', Auth::user()->id)->where('genaral', '=', 1)->get();
-            //dd($cartUser);
-            foreach ($cartUser as $car) {
-                //$pro = Product::where('id', '=', $car->idProduct)->get();
-                $pro = Product::find($car->idProduct);
-                //dd($pro);
+        $cartUser = Cart::where('idUser', '=', Auth::user()->id)->where('genaral','=',1)->get();
+        $id_cart = '';
+        foreach ($cartUser as $key => $item) {
+            $id_cart =  $item->id. ',' . $id_cart;
+        }
+        $id_cart = substr($id_cart, 0, -1);
+
+        $bill = new Bill();
+        $bill->idUser = Auth::user()->id;
+        $bill->name = $request->name;
+        $bill->email = $request->email;
+        // genaral status 0 là hiển thị dưới dạng người dùng mới tạo và chưa có contract
+        // genaral 1 mua nhưng k tạo contract
+        // 3 là có tạo contract
+        $bill->genaral = 0;
+        $bill->price = $request->price;
+        $bill->numberPhone = $request->numberPhone;
+        $bill->address = "Số-Đường :".$request->sonha."/Xã :".$request->xa."/Huyện-Quận :".$request->huyen."/Tỉnh :".$request->tinh;
+        $bill->idCart = $id_cart;
+        $bill->save();
+        if($bill)
+        {
+            foreach($cartUser as $car){
+                $pro =Product::find($car->idProduct);
                 $pro->amount = $pro->amount - $car->amount;
                 $pro->save();
                 $car->genaral = 2;
                 $car->save();
             }
-            return redirect()->route('home')->with('success', 'Đặt thành công.');
+            return redirect()->route('home')->with('success','Đặt thành công.');
         }
 
     }

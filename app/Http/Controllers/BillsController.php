@@ -13,9 +13,10 @@ class BillsController extends Controller
     public function list()
     {
         //trạng thái 1 là chưa chuyển
-        // 2 là đã chuyển 
-        $data = Bill::where('genaral','=',1)->orderBy('id','DESC')->search()->paginate(10);
-        return view('admin.bill.list', compact('data'));
+        // 2 là đã chuyển
+        $data = Bill::where('genaral','=',0)->Orwhere('genaral','=',3)->orderBy('id','DESC')->search()->paginate(10);
+        $data1 = Bill::where('genaral','=',0)->get();
+        return view('admin.bill.list', compact('data','data1'));
     }
     public function edit(Bill $id)
     {
@@ -40,9 +41,9 @@ class BillsController extends Controller
         }
     }
     public function delete(Bill $id)
-    {   
+    {
         $id->delete();
-        return redirect()->route('admin.listBill')->with('success','Đã xóa sản phẩm');   
+        return redirect()->route('admin.listBill')->with('success','Đã xóa sản phẩm');
     }
     public function update(updateRequest $request, Bill  $id)
     {
@@ -73,12 +74,14 @@ class BillsController extends Controller
         }
     }
     public function sanpham($id, $idUser){
-        $data = Cart::where('idUser','=',$idUser)->where('genaral','=',2)->get();
+        $bill = Bill::find($id);
+        $dataCart = explode(',', $bill->idCart);
+        $data = Cart::whereIn('id', $dataCart)->where('idUser','=',$idUser)->where('genaral','=',2)->get();
         $products = Product::all();
         $total =0;
         foreach($data as $car){
-                $product =Product::find($car->idProduct); 
-                if(!empty($product)) 
+                $product =Product::find($car->idProduct);
+                if(!empty($product))
                 {
                     $total = $total + ($product->price * $car->amount);
                 }
@@ -91,11 +94,13 @@ class BillsController extends Controller
     }
     public function change($id){
         $bill = Bill::find($id);
-        $cart = Cart::all();
+        $dataCart = explode(',', $bill->idCart);
+        $cart = Cart::whereIn('id', $dataCart)->get();
         if($bill->idUser != null){
             foreach($cart as $car){
                 if($car->idUser == $bill->idUser && $car->genaral==2){
-                    $car->delete();
+                    $car->genaral=3;
+                    $car->save();
                 }
             }
             $bill->genaral = 2;
@@ -109,10 +114,11 @@ class BillsController extends Controller
     }
     public function history(){
         $data = Bill::where('genaral','=',2)->orderBy('id','DESC')->search()->paginate(10);
+        $data2 = Bill::where('genaral','=',2)->get();
         $total = 0;
-        foreach($data as $dat){
+        foreach($data2 as $dat){
             $total = $total + $dat->price;
         }
-        return view('admin.bill.history', compact('data','total'));
+        return view('admin.bill.history', compact('data','total','data2'));
     }
 }
