@@ -11,6 +11,7 @@ class Bill extends Model
     protected $table ='bill';
     protected $fillable=[
         'idUser',
+        'idCart',
         'name',
         'email',
         'numberPhone',
@@ -20,7 +21,7 @@ class Bill extends Model
         'created_at',
         'updated_at'
     ];
-   
+
     public function users()
     {
         return $this->hasOne(Users::class);

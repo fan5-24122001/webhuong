@@ -45,7 +45,11 @@
             </div>
             <div class="col-lg-9 col-md-9">
                 <div class="row">
-
+                   @if($pro->isEmpty())
+                    <div class="col-lg-4 col-md-4 col-sm-6 mix women">
+                        <p>Không tìm thấy dữ liệu!</p>
+                    </div>
+                    @else
                     @foreach($pro as $item)
                     <div class="col-lg-4 col-md-4 col-sm-6 mix women">
                         <div class="product__item">
@@ -74,7 +78,7 @@
                         </div>
                     </div>
                     @endforeach
-
+                    @endif
                     <div class="col-lg-12 text-center">
 
                         

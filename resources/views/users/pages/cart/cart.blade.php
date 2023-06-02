@@ -31,6 +31,11 @@
                             </tr>
                         </thead>
                         <tbody>
+                        @if($data->isEmpty())
+                        <tr>
+                        <td colspan="8" class="text-center">Hiện Tại Bạn Chưa Thêm Sản Phẩm Nào</td>
+                    </tr>
+                    @else
                             @foreach ($data as $item)
                             @foreach ($products as $pro)
                             @if ($pro->id == $item->idProduct)
@@ -69,6 +74,7 @@
                             @endif
                             @endforeach
                             @endforeach
+                            @endif
                         </tbody>
                     </table>
                 </div>

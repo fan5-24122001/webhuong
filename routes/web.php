@@ -25,10 +25,23 @@ use App\Http\Controllers\Auth\ChangePasswordController;
 */
 
 
+
 Route::get('/change-password', [ChangePasswordController::class, 'showChangePasswordForm'])->name('password.change');
 Route::post('/change-password', [ChangePasswordController::class, 'changePassword'])->name('password.update');
 
 Route::group(['prefix' => 'admin'], function () {
+    Route::controller(BillsController::class)->group(function () {
+        Route::get('/bill','list')->name('admin.listBill');
+        Route::get('/hoadon/sanpham/{id}/{idUser}','sanpham')->name('admin.sanpham');
+        Route::get('/editbill/{id}','edit')->name('admin.editBill');
+        Route::PUT('/updatebill/{id}','update')->name('admin.updateBill');
+        Route::get('/addbill','add')->name('admin.addBill');
+        Route::get('/changebill/{id}','change')->name('admin.changeBill');
+        Route::POST('/postaddbill','create')->name('admin.postaddBill');
+        Route::DELETE('/deletebill/{id}','delete')->name('admin.deleteBill');
+        Route::get('/historyBill','history')->name('admin.historyBill');
+    });
+
     Route::controller(ProductController::class)->group(function () {
         Route::get('/search', 'search')->name('admin.search');
 
@@ -96,7 +109,7 @@ Route::group(['prefix' => 'admin'], function () {
         Route::DELETE('/deletebill/{id}','delete')->name('admin.deleteBill');
         Route::get('/historyBill','history')->name('admin.historyBill');
     });
-   
+
 });
 
 Auth::routes();
@@ -104,7 +117,7 @@ Route::post('/comment/store', [CommentController::class, 'store'])->name('commen
 Route::post('/reply/store', [CommentController::class, 'replyStore'])->name('reply.add');
 
 Route::get('admin/home', [HomeController::class, 'adminHome'])->name('admin.home')->middleware('is_admin');
-Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('trangchu');
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/sanpham/{idProduct}',[App\Http\Controllers\HomeController::class,'viewProduct'])->name('home.product');
 Route::post('cart', [CartController::class, 'addToCart'])->name('cart.store');

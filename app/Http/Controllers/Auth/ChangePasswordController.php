@@ -14,24 +14,28 @@ class ChangePasswordController extends Controller
         return view('auth.change-password');
     }
 
+    
     public function changePassword(Request $request)
     {
         $request->validate([
             'current_password' => 'required',
-            'password' => 'required|string|min:8|confirmed',
+            'new_password' => 'required|string|min:8|confirmed',
         ]);
 
         $user = Auth::user();
 
-        if (!Hash::check($request->current_password, $user->password)) {
-            throw ValidationException::withMessages([
-                'current_password' => ['The current password is incorrect.'],
+        if (Hash::check($request->current_password, $user->password)) {
+            $user->update([
+                'password' => Hash::make($request->new_password)
             ]);
+
+            return redirect()->back()->with('success', 'Password changed successfully');
+        } else {
+            return redirect()->back()->withErrors(['current_password' => 'Incorrect current password']);
         }
-
-        $user->password = Hash::make($request->password);
-        $user->save();
-
-        return redirect()->route('home')->with('success', 'Password changed successfully!');
     }
+
+    // ...
 }
+
+
