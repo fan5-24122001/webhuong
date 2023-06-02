@@ -12,8 +12,7 @@ class BillsController extends Controller
 {
     public function list()
     {
-        //trạng thái 1 là chưa chuyển
-        // 2 là đã chuyển 
+
         $data = Bill::where('genaral','=',1)->orderBy('id','DESC')->search()->paginate(10);
         return view('admin.bill.list', compact('data'));
     }
@@ -95,7 +94,7 @@ class BillsController extends Controller
         if($bill->idUser != null){
             foreach($cart as $car){
                 if($car->idUser == $bill->idUser && $car->genaral==2){
-                    $car->delete();
+                   
                 }
             }
             $bill->genaral = 2;

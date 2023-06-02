@@ -12,6 +12,7 @@ use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\NhapXuatKhoController;
+use App\Http\Controllers\Auth\ChangePasswordController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -24,6 +25,8 @@ use App\Http\Controllers\NhapXuatKhoController;
 */
 
 
+Route::get('/change-password', [ChangePasswordController::class, 'showChangePasswordForm'])->name('password.change');
+Route::post('/change-password', [ChangePasswordController::class, 'changePassword'])->name('password.update');
 
 Route::group(['prefix' => 'admin'], function () {
     Route::controller(ProductController::class)->group(function () {

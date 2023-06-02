@@ -1,7 +1,7 @@
 <header class="header">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-xl-3 col-lg-2">
+            <div class="col-xl-4 col-lg-2">
                 <div class="header__logo">
                     <a href="./index.html"><img src="users/img/logo.png" alt=""></a>
                 </div>
@@ -9,17 +9,18 @@
             <div class="col-xl-6 col-lg-6">
                 <nav class="header__menu">
                     <ul>
-                        <li class="active"><a href="{{route('home')}}">Home</a></li>
-                        <li><a href="{{route('shop')}}">Shop</a></li>
-                        
-                        <li><a href="{{route('home.blog')}}">Blog</a></li>
-                        <li><a href="{{route('home.contact')}}">Contact</a></li>
+                        <li class="active"><a href="{{route('home')}}">Trang Chủ</a></li>
+                        <li><a href="{{route('shop')}}">Cửa Hàng</a></li>
+                        <li><a href="{{route('home.blog')}}">Tin Tức</a></li>
+                        <li><a href="{{route('home.contact')}}">Gioi Thiệu</a></li>
+                        <li><a href="{{route('home.contact')}}">Chính Sách Shop</a></li>
                     </ul>
                 </nav>
             </div>
             @guest
             @if (Route::has('login'))
-            <div class="col-lg-3">
+            
+            <div class="col-lg-2">
                 <div class="header__right">
 
                     <div class="header__right__auth">
@@ -40,13 +41,13 @@
             @endif
             @else
             @if (Auth::user()->is_admin == 0)
-            <div class="col-xl-3">
+            <div class="col-xl-2">
                 <nav class="header__menu">
                     <ul>
 
-                        <li><a href="#"><img src="users/123.png" style="width: 20px;">{{ Auth::user()->name  }}</a>
+                        <li><a href="#"><img src="https://cdn-icons-png.flaticon.com/512/1077/1077114.png" style="width: 20px;">{{ Auth::user()->name  }}</a>
                             <ul class="dropdown">
-                                <li><a href="./product-details.html">Profile</a></li>
+                                <li><a href="{{ route('password.change') }}">Profile</a></li>
                                 <li><a href="{{ route('home.mycart') }}">Đơn hàng </a></li>
 
                                 <li> <a href="{{ route('logout') }}" onclick="event.preventDefault();

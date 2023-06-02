@@ -74,6 +74,19 @@
                                     @enderror
                                 </div>
                             </div>
+                            <div class="row form-group">
+                            <div class="col col-md-3">
+                                    <label for="text-input" class=" form-control-label"> Show </label>
+                                </div>
+                                <div class="col-12 col-md-9">
+                                    <select name="showsp" id="">
+                                       
+                                            <option value="0"> ẩn </option>
+                                            <option value="1"> hiện</option>
+                                      
+                                    </select>
+                                    </div>
+                                </div>
                             <div class="col">
                                 <div class="image_here">
                                     @foreach (explode('|',$product->image) as $key => $image)

@@ -67,6 +67,7 @@ class ProductController extends Controller
         $product->amount = $request->amount;
         $product->description = $request->description;
         $product->price = $request->price;
+        $product->showsp = $request->showsp;
         if ($request->has('image')) {
             if (!empty($request->image)) {
                 $countImageOld = count(explode('|', $product->image));

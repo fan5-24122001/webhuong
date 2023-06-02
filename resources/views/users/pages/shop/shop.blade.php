@@ -22,7 +22,7 @@
                     <div class="shop__sidebar">
                         <div class="sidebar__categories">
                             <div class="section-title">
-                                <h4>Categories</h4>
+                                <h4>DANH MỤC SẢN PHẨM </h4>
                             </div>
                             <div class="categories__accordion">
                                 <div class="accordion" id="accordionExample">

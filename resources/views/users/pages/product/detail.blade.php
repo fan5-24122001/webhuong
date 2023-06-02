@@ -90,10 +90,7 @@
                                 Hàng Đã Hết</a>
                                 @endif
 
-                                <ul>
-                                    <li><a href="#"><span class="icon_heart_alt"></span></a></li>
-                                    <li><a href="#"><span class="icon_adjust-horiz"></span></a></li>
-                                </ul>
+                                
                         </div>
                         <div class="product__details__widget">
                             <ul>
@@ -119,10 +116,10 @@
                 <div class="product__details__tab">
                     <ul class="nav nav-tabs" role="tablist">
                         <li class="nav-item">
-                            <a class="nav-link active" data-toggle="tab" href="#tabs-1" role="tab">Description</a>
+                            <a class="nav-link active" data-toggle="tab" href="#tabs-1" role="tab">THÔNG TIN SẢN PHẨM</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" data-toggle="tab" href="#tabs-2" role="tab">Specification</a>
+                            <a class="nav-link" data-toggle="tab" href="#tabs-2" role="tab">HƯỚNG DẪN MUA HÀNG & THANH TOÁN</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" data-toggle="tab" href="#tabs-3" role="tab">Reviews
@@ -139,17 +136,28 @@
                                 quis, sem.</p>
                         </div>
                         <div class="tab-pane" id="tabs-2" role="tabpanel">
-                            <h6>Specification</h6>
-                            <p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut loret fugit, sed
-                                quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt loret.
-                                Neque porro lorem quisquam est, qui dolorem ipsum quia dolor si. Nemo enim ipsam
-                                voluptatem quia voluptas sit aspernatur aut odit aut loret fugit, sed quia ipsu
-                                consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Nulla
-                                consequat massa quis enim.</p>
-                            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget
-                                dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes,
-                                nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium
-                                quis, sem.</p>
+                        <h2>Hướng dẫn mua hàng:</h2>
+<p>
+    Bạn truy cập website của chúng tôi qua địa chỉ: <a href="https://kyo.vn">KYO.VN</a>, xem sản phẩm và lựa chọn sản phẩm cần mua.
+    Nhấn nút "MUA NGAY" để đưa sản phẩm vào giỏ hàng.
+    Sau khi đã hoàn tất chọn hàng, bạn vào giỏ hàng để xem lại (biểu tượng giỏ hàng ngoài cùng bên phải topbar).
+    Chuyển tới trang thanh toán.
+    Nhập đầy đủ thông tin cá nhân và thông tin thanh toán vào biểu mẫu.
+    Kết thúc đơn hàng, bạn vui lòng chờ nhân viên của chúng tôi điện thoại lại để xác nhận và gửi hàng.
+</p>
+
+<h2>Hướng dẫn thanh toán:</h2>
+<p>
+    Chúng tôi cung cấp 2 hình thức thanh toán: Giao hàng thu tiền COD và Chuyển khoản ngân hàng.
+    (1): Bạn đặt hàng và được nhân viên xác nhận qua cuộc gọi. Qua đó, chúng tôi gửi hàng về cho bạn thông qua dịch vụ ship COD. Bạn nhận hàng và thanh toán cho nhân viên giao hàng.
+    (2): Sau khi đặt hàng bạn chuyển khoản cho chúng tôi qua một trong các tài khoản ngân hàng sau:
+    - Ngân hàng Việt Nam Thịnh Vượng (VPBank) Số tài khoản: 69998689999
+    - Ngân hàng Quân Đội (MBBank) Số tài khoản: 9993899699999
+    (Thông tin chuyển khoản cũng sẽ được hiển thị ở bước thanh toán khi đặt hàng trên website)
+    Sau khi nhận được tiền chúng tôi sẽ gửi hàng cho bạn thông qua đơn vị vận chuyển.
+    Note: Sau khi chuyển khoản thành công bạn vui lòng thông tin cho chúng tôi qua Hotline: 0986 448 789 (zalo, imes) hoặc Email: kyoauthentic@gmail.com để đơn hàng được xử lý nhanh nhất.
+</p>
+
                         </div>
                         <div class="tab-pane" id="tabs-3" role="tabpanel">
                             <h6>Reviews ({{$comment-> count()}} )</h6>

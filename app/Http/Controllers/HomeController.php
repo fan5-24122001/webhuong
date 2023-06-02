@@ -34,7 +34,8 @@ class HomeController extends Controller
             $idUser = Auth::user()->id;
             $cart = Cart::where('idUser', '=', $idUser)->get();
             $data = Product::all();
-
+            $data1 = DB::table('product')->where('showsp','1')->get();;
+          
             foreach ($cart as $car) {
                 if ($car->idUser == $idUser) {
                     $product = Product::find($car->idProduct);
@@ -48,11 +49,12 @@ class HomeController extends Controller
                 }
             }
             //return view('page.content.home', compact(['products']));
-            return view('users.home', compact(['data', 'total', 'amount']));
+            return view('users.home', compact(['data', 'total', 'amount','data1']));
         } else {
             $cate = Category::all();
             $data = Product::all();
-            return view('users.home', compact(['data']));
+            $data1 = DB::table('product')->where('showsp','1')->get();;
+            return view('users.home', compact(['data','data1']));
         }
     }
 
@@ -364,26 +366,7 @@ class HomeController extends Controller
         $amount = 0;
         $total = 0;
         $idUser = Auth::user()->id;
-        $cart = Cart::where('idUser', '=', $idUser)->where('genaral', '=', 1)->get();
-        $products = Product::all();
-        foreach ($cart as $car) {
-            if ($car->idUser == $idUser && $car->genaral == 1) {
-                $product = Product::find($car->idProduct);
-                if (!empty($product)) {
-                    $total = $total + ($product->price * $car->amount);
-                    $amount++;
-                } else {
-                    $total = 0;
-                    $amount = 0;
-                }
-            }
-        }
-        $bill = Bill::where('genaral', '=', 1)->where('idUser', '=', $idUser)->get();
-        $data = Cart::where('idUser', '=', $idUser)->where('genaral', '=', 1)->get();
-        //dd(empty($data[0]->id));
-        $datanext = Cart::where('idUser', '=', $idUser)->where('genaral', '=', 2)->get();
-        return view('users.pages.order.checkoder', compact('products', 'data', 'total', 'amount', 'datanext', 'bill'));
+        $bill = Bill::where('idUser', '=', $idUser)->get();
+        return view('users.pages.order.checkoder', compact( 'total',  'bill'));
     }
-
-
 }
