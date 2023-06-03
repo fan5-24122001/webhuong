@@ -30,18 +30,6 @@ Route::get('/change-password', [ChangePasswordController::class, 'showChangePass
 Route::post('/change-password', [ChangePasswordController::class, 'changePassword'])->name('password.update');
 
 Route::group(['prefix' => 'admin'], function () {
-    Route::controller(BillsController::class)->group(function () {
-        Route::get('/bill','list')->name('admin.listBill');
-        Route::get('/hoadon/sanpham/{id}/{idUser}','sanpham')->name('admin.sanpham');
-        Route::get('/editbill/{id}','edit')->name('admin.editBill');
-        Route::PUT('/updatebill/{id}','update')->name('admin.updateBill');
-        Route::get('/addbill','add')->name('admin.addBill');
-        Route::get('/changebill/{id}','change')->name('admin.changeBill');
-        Route::POST('/postaddbill','create')->name('admin.postaddBill');
-        Route::DELETE('/deletebill/{id}','delete')->name('admin.deleteBill');
-        Route::get('/historyBill','history')->name('admin.historyBill');
-    });
-
     Route::controller(ProductController::class)->group(function () {
         Route::get('/search', 'search')->name('admin.search');
 
@@ -99,15 +87,15 @@ Route::group(['prefix' => 'admin'], function () {
         Route::get('/delete-Order/{id}', 'Delete')->name('Order.Delete');
     });
     Route::controller(BillsController::class)->group(function () {
-        Route::get('/list123','list')->name('admin.listBill');
+        Route::get('/danh-sach-don-hang/{genaral}','list')->name('admin.listBill');
         Route::get('/hoadon/sanpham/{id}/{idUser}','sanpham')->name('admin.sanpham');
         Route::get('/editbill/{id}','edit')->name('admin.editBill');
         Route::PUT('/updatebill/{id}','update')->name('admin.updateBill');
         Route::get('/addbill','add')->name('admin.addBill');
-        Route::get('/changebill/{id}','change')->name('admin.changeBill');
         Route::POST('/postaddbill','create')->name('admin.postaddBill');
         Route::DELETE('/deletebill/{id}','delete')->name('admin.deleteBill');
         Route::get('/historyBill','history')->name('admin.historyBill');
+        Route::get('/changebill/{id}/{status}','change')->name('admin.changeBill');
     });
 
 });

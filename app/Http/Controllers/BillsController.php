@@ -10,12 +10,12 @@ use App\Http\Requests\Bill\createRequest;
 
 class BillsController extends Controller
 {
-    public function list()
+    public function list($genaral)
     {
         //trạng thái 1 là chưa chuyển
         // 2 là đã chuyển
-        $data = Bill::where('genaral','=',0)->Orwhere('genaral','=',3)->orderBy('id','DESC')->search()->paginate(10);
-        $data1 = Bill::where('genaral','=',0)->get();
+        $data = Bill::where('genaral','=',$genaral)->orderBy('id','DESC')->search()->paginate(10);
+        $data1 = Bill::where('genaral','=',$genaral)->get();
         return view('admin.bill.list', compact('data','data1'));
     }
     public function edit(Bill $id)
@@ -92,7 +92,7 @@ class BillsController extends Controller
         }
         return view('admin.bill.cartsp', compact(['id', 'data', 'total','products']));
     }
-    public function change($id){
+    public function change($id, $status){
         $bill = Bill::find($id);
         $dataCart = explode(',', $bill->idCart);
         $cart = Cart::whereIn('id', $dataCart)->get();
@@ -103,13 +103,13 @@ class BillsController extends Controller
                     $car->save();
                 }
             }
-            $bill->genaral = 2;
+            $bill->genaral = $status;
             $bill->save();
-            return redirect()->route('admin.listBill')->with('success','Đã xác nhận giao hàng');
+            return redirect()->back()->with('success','Đã xác nhận giao hàng');
         }
         else{
             $bill->delete();
-            return redirect()->route('admin.listBill')->with('success','Đã xác nhận giao hàng');
+            return redirect()->back()->with('success','Đã xác nhận giao hàng');
         }
     }
     public function history(){

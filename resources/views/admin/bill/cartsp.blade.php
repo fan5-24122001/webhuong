@@ -10,7 +10,7 @@
 </div>
 <div style="display: flex; justify-content: space-between;">
     <h3>Tổng tiền: <b class="text-danger">{{($total)}} vnĐ</b></h3>
-    <a href="{{ route('admin.changeBill',$id)}}"><span class="badge badge-success"><h4>Xác nhận đã giao</h4></span></a>
+    <a href="{{ route('admin.changeBill',['id'=>$id, 'status'=>2])}}"><span class="badge badge-success"><h4>Xác nhận đã giao</h4></span></a>
 </div>
 <table class="table table-data2">
     <thead>
@@ -30,7 +30,7 @@
                 <td>{{$book->id}}</td>
                 <td><b>{{$item->name}}</b></td>
                 <td><b class="text-danger">{{$book->amount}}</b>/kg</td>
-                <td><b class="text-primary">{{($item->price)}}</b>vnĐ</td>    
+                <td><b class="text-primary">{{($item->price)}}</b>vnĐ</td>
                 <td><b class="text-warning">{{($item->price * $book->amount)}} vnĐ</b></td>
             </tr>
             <tr class="spacer"></tr>

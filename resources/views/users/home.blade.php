@@ -85,8 +85,7 @@
                         <ul class="product__hover">
                             <li><a href="" class="image-popup"><span class="arrow_expand"></span></a></li>
                             <li><a href="{{ route('love',['id_user'=> Auth::user()->id,'id_product'=>$item->id ]) }}"><span class="icon_heart_alt"></span></a></li>
-                          
-                            <li><a href="{{ route('home.themcart', [Auth::user()->id,$item->id]) }}"><span class="fa fa-shopping-cart"></span></a></li>
+                            <li><a href="{{ route('cart.store') }}"><span class="fa fa-shopping-cart"></span></a></li>
                         </ul>
                     </div>
                     <div class="product__item__text">
@@ -192,7 +191,7 @@
                         <ul class="product__hover">
                             <li><a href="" class="image-popup"><span class="arrow_expand"></span></a></li>
                             <li><a href="{{ route('love',['id_user'=> Auth::user()->id,'id_product'=>$item->id ]) }}"><span class="icon_heart_alt"></span></a></li>
-                          
+
                             <li><a href="{{ route('home.themcart', [Auth::user()->id,$item->id]) }}"><span class="fa fa-shopping-cart"></span></a></li>
                         </ul>
                     </div>

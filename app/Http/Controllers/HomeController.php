@@ -36,7 +36,7 @@ class HomeController extends Controller
             $cart = Cart::where('idUser', '=', $idUser)->get();
             $data = Product::all();
             $data1 = DB::table('product')->where('showsp','1')->get();;
-          
+
             foreach ($cart as $car) {
                 if ($car->idUser == $idUser) {
                     $product = Product::find($car->idProduct);
@@ -380,7 +380,32 @@ class HomeController extends Controller
         $amount = 0;
         $total = 0;
         $idUser = Auth::user()->id;
-        $bill = Bill::where('idUser', '=', $idUser)->get();
-        return view('users.pages.order.checkoder', compact( 'total',  'bill'));
+        $bill1 = Bill::where('idUser', '=', $idUser)->where('genaral', 0)->get();
+        $bill2 = Bill::where('idUser', '=', $idUser)->where('genaral', 1)->get();
+        $bill3 = Bill::where('idUser', '=', $idUser)->where('genaral', 2)->get();
+        $carts1 = [];
+        $carts2 = [];
+        $carts3 = [];
+        foreach ($bill1 as $key => $bil) {
+            $cart = DB::table('cart')->whereIn('cart.id', explode(',', $bil->idCart))
+            ->join('product', 'product.id', '=', 'cart.idProduct')->
+            select('cart.*', 'product.name', 'product.price', 'product.image', 'product.description')->get();
+            array_push($carts1, $cart);
+        }
+        $carts2 = [];
+        foreach ($bill2 as $key => $bil) {
+            $cart = DB::table('cart')->whereIn('cart.id', explode(',', $bil->idCart))
+            ->join('product', 'product.id', '=', 'cart.idProduct')->
+            select('cart.*', 'product.name', 'product.price', 'product.image', 'product.description')->get();
+            array_push($carts2, $cart);
+        }
+        $carts3 = [];
+        foreach ($bill3 as $key => $bil) {
+            $cart = DB::table('cart')->whereIn('cart.id', explode(',', $bil->idCart))
+            ->join('product', 'product.id', '=', 'cart.idProduct')->
+            select('cart.*', 'product.name', 'product.price', 'product.image', 'product.description')->get();
+            array_push($carts3, $cart);
+        }
+        return view('users.pages.order.checkoder', compact( 'total', 'carts1', 'carts2', 'carts3'));
     }
 }
