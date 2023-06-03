@@ -47,7 +47,7 @@
 
                         <li><a href="#"><img src="https://cdn-icons-png.flaticon.com/512/1077/1077114.png" style="width: 20px;">{{ Auth::user()->name  }}</a>
                             <ul class="dropdown">
-                                <li><a href="{{ route('password.change') }}">Profile</a></li>
+                            <li><a href="{{ route('home.useredit',[Auth::user()->id]) }}">Profile</a></li>
                                 <li><a href="{{ route('home.mycart') }}">Đơn hàng </a></li>
 
                                 <li> <a href="{{ route('logout') }}" onclick="event.preventDefault();

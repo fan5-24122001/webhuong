@@ -31,9 +31,6 @@
                                             <a href="{{route('User.Delete',$us->id)}}" class="item btnDelete"  data-toggle="tooltip" data-placement="top" title="Delete">
                                                 <i  class="zmdi zmdi-delete text-danger"></i>
                                             </a>
-                                            <a  href="{{route('User.edit',$us->id)}}" class="item btnEdit" data-toggle="tooltip" data-placement="top" title="Edit">
-                                                <i class="zmdi zmdi-edit"></i>
-                                            </a>
                                         </div> 
                                     </td>
                                 </tr>

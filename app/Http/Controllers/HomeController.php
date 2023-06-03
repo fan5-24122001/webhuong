@@ -2,18 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use DB;
 use App\Models\Bill;
-use App\Models\Love;
-use App\Models\NhapXuatKho;
-use App\Models\User;
 use App\Models\Cart;
+use App\Models\Love;
+use App\Models\User;
 use App\Models\Comment;
 use App\Models\Product;
 use App\Models\Category;
+use App\Models\NhapXuatKho;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\Bill\createRequest;
-use DB;
 
 class HomeController extends Controller
 {
@@ -35,8 +36,9 @@ class HomeController extends Controller
             $idUser = Auth::user()->id;
             $cart = Cart::where('idUser', '=', $idUser)->get();
             $data = Product::all();
-            $data1 = DB::table('product')->where('showsp','1')->get();;
-          
+            $data1 = DB::table('product')->where('showsp', '1')->get();
+            ;
+
             foreach ($cart as $car) {
                 if ($car->idUser == $idUser) {
                     $product = Product::find($car->idProduct);
@@ -50,12 +52,13 @@ class HomeController extends Controller
                 }
             }
             //return view('page.content.home', compact(['products']));
-            return view('users.home', compact(['data', 'total', 'amount','data1']));
+            return view('users.home', compact(['data', 'total', 'amount', 'data1']));
         } else {
             $cate = Category::all();
             $data = Product::all();
-            $data1 = DB::table('product')->where('showsp','1')->get();;
-            return view('users.home', compact(['data','data1']));
+            $data1 = DB::table('product')->where('showsp', '1')->get();
+            ;
+            return view('users.home', compact(['data', 'data1']));
         }
     }
 
@@ -77,14 +80,19 @@ class HomeController extends Controller
     public function adminHome()
     {
         $this->middleware('auth');
-        $pro = Product::all()->count();;
-        $cate = Category::all()->count();;
-        $user = User::where('is_admin' ,'=',0)->count();
-        $nv = User::where('is_admin' ,'=',2)->count();;
-        $qln = NhapXuatKho::where('type','=',1)->count();;
-        $qlx = NhapXuatKho::where('type','=',2)->count();;
+        $pro = Product::all()->count();
+        ;
+        $cate = Category::all()->count();
+        ;
+        $user = User::where('is_admin', '=', 0)->count();
+        $nv = User::where('is_admin', '=', 2)->count();
+        ;
+        $qln = NhapXuatKho::where('type', '=', 1)->count();
+        ;
+        $qlx = NhapXuatKho::where('type', '=', 2)->count();
+        ;
         $bill = Bill::all()->count();
-        return view('admin.home', compact(['pro','cate','user','nv','qln','qlx','bill']));
+        return view('admin.home', compact(['pro', 'cate', 'user', 'nv', 'qln', 'qlx', 'bill']));
     }
 
     public function addcart($idUser, $idProduct)
@@ -227,7 +235,7 @@ class HomeController extends Controller
         $total = 0;
         $category = Category::all();
         $idUser = Auth::user()->id;
-        $cart = Cart::where('idUser', '=', $idUser)->where('genaral','=',1)->get();
+        $cart = Cart::where('idUser', '=', $idUser)->where('genaral', '=', 1)->get();
         $products = Product::all();
         foreach ($cart as $car) {
             if ($car->idUser == $idUser) {
@@ -241,15 +249,15 @@ class HomeController extends Controller
                 }
             }
         }
-        $data = Cart::where('idUser', '=', $idUser)->where('genaral','=',1)->get();
+        $data = Cart::where('idUser', '=', $idUser)->where('genaral', '=', 1)->get();
         return view('users.pages.cart.cart', compact('products', 'data', 'total', 'amount'));
     }
     public function postthanhtoan(createRequest $request)
     {
-        $cartUser = Cart::where('idUser', '=', Auth::user()->id)->where('genaral','=',1)->get();
+        $cartUser = Cart::where('idUser', '=', Auth::user()->id)->where('genaral', '=', 1)->get();
         $id_cart = '';
         foreach ($cartUser as $key => $item) {
-            $id_cart =  $item->id. ',' . $id_cart;
+            $id_cart = $item->id . ',' . $id_cart;
         }
         $id_cart = substr($id_cart, 0, -1);
 
@@ -263,19 +271,18 @@ class HomeController extends Controller
         $bill->genaral = 0;
         $bill->price = $request->price;
         $bill->numberPhone = $request->numberPhone;
-        $bill->address = "Số-Đường :".$request->sonha."/Xã :".$request->xa."/Huyện-Quận :".$request->huyen."/Tỉnh :".$request->tinh;
+        $bill->address = "Số-Đường :" . $request->sonha . "/Xã :" . $request->xa . "/Huyện-Quận :" . $request->huyen . "/Tỉnh :" . $request->tinh;
         $bill->idCart = $id_cart;
         $bill->save();
-        if($bill)
-        {
-            foreach($cartUser as $car){
-                $pro =Product::find($car->idProduct);
+        if ($bill) {
+            foreach ($cartUser as $car) {
+                $pro = Product::find($car->idProduct);
                 $pro->amount = $pro->amount - $car->amount;
                 $pro->save();
                 $car->genaral = 2;
                 $car->save();
             }
-            return redirect()->route('home')->with('success','Đặt thành công.');
+            return redirect()->route('home')->with('success', 'Đặt thành công.');
         }
 
     }
@@ -381,6 +388,48 @@ class HomeController extends Controller
         $total = 0;
         $idUser = Auth::user()->id;
         $bill = Bill::where('idUser', '=', $idUser)->get();
-        return view('users.pages.order.checkoder', compact( 'total',  'bill'));
+        return view('users.pages.order.checkoder', compact('total', 'bill'));
+    }
+
+    public function changePassword()
+    {
+        return view('users.pages.user.change-password');
+    }
+    public function updatePassword(Request $request)
+    {
+        # Validation
+        $request->validate([
+            'old_password' => 'required',
+            'new_password' => 'required|confirmed',
+        ]);
+
+
+        #Match The Old Password
+        if (!Hash::check($request->old_password, auth()->user()->password)) {
+            return back()->with("error", "Old Password Doesn't match!");
+        }
+
+
+        #Update the new Password
+        User::whereId(auth()->user()->id)->update([
+            'password' => Hash::make($request->new_password)
+        ]);
+
+        return back()->with("status", "Password changed successfully!");
+    }
+
+    public function edituser($id)
+    {
+        $user = User::find($id);
+        return view('users.pages.user.edit', compact('user'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $user = User::find($id);
+        $user->name = $request['name'];
+        $user->address = $request['address'];   
+        $user->save();
+        return redirect()->back()->with('success', 'Cập nhật thành công');
     }
 }

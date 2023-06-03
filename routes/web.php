@@ -13,6 +13,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\NhapXuatKhoController;
 use App\Http\Controllers\Auth\ChangePasswordController;
+use App\Http\Controllers\Auth\ForgotPasswordController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -25,10 +26,12 @@ use App\Http\Controllers\Auth\ChangePasswordController;
 */
 
 
-
-Route::get('/change-password', [ChangePasswordController::class, 'showChangePasswordForm'])->name('password.change');
-Route::post('/change-password', [ChangePasswordController::class, 'changePassword'])->name('password.update');
-
+Route::get('forget-password', [ForgotPasswordController::class, 'showForgetPasswordForm'])->name('forget.password.get');
+Route::post('forget-password', [ForgotPasswordController::class, 'submitForgetPasswordForm'])->name('forget.password.post'); 
+Route::get('reset-password/{token}', [ForgotPasswordController::class, 'showResetPasswordForm'])->name('reset.password.get');
+Route::post('reset-password', [ForgotPasswordController::class, 'submitResetPasswordForm'])->name('reset.password.post');
+Route::get('/change-password', [App\Http\Controllers\HomeController::class, 'changePassword'])->name('change-password');
+Route::post('/change-password', [App\Http\Controllers\HomeController::class, 'updatePassword'])->name('update-password');
 Route::group(['prefix' => 'admin'], function () {
     Route::controller(BillsController::class)->group(function () {
         Route::get('/bill','list')->name('admin.listBill');
@@ -140,4 +143,6 @@ Route::post('/search', 'search')->name('search');
 Route::get('/kiemtradonhang', 'mycart')->name('home.mycart');
 Route::get('/contact', 'contact')->name('home.contact');
 Route::get('/blog', 'blog')->name('home.blog');
+Route::get('/useredit/{id}', 'edituser')->name('home.useredit');
+Route::put('/userupdate/{id}', 'update')->name('users.update');
 });

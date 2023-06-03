@@ -16,16 +16,7 @@
                                     <label for="text-input" class=" form-control-label"> Quyền </label>
                                 </div>
                                 <div class="col-12 col-md-9">
-                                <select class="default-select  form-control wide" name="is_admin">
-                                                        @if ($user->is_admin == 0)
-                                                            <option selected value="0"> Khách Hàng</option>
-                                                            <option value="2">  Nhân Viên</option>
-                                                        @endif
-                                                        @if ($user->is_admin == 2)
-                                                        <option value="0">  Khách Hàng</option>
-                                                        <option selected value="2"> Nhân Viên</option>
-                                                        @endif
-                                </select>
+                                
                                 </div>
                             </div>
                            

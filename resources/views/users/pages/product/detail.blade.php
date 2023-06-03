@@ -160,24 +160,39 @@
 
                         </div>
                         <div class="tab-pane" id="tabs-3" role="tabpanel">
-                            <h6>Reviews ({{$comment-> count()}} )</h6>
-                            <form method="post" action="{{ route('comment.add') }}">
-                                @csrf
-                                <div class="form-group">
-                                    <input type="text" name="comment_body" class="form-control" />
-                                    <input type="hidden" name="post_id" value="{{ $data->id }}" />
-                                </div>
-                                <div class="form-group">
-                                    <input type="submit" class="btn btn-warning" value="Add Comment" />
-                                </div>
-                            </form>
+                        <h6>Reviews ({{ $comment->count() }})</h6>
 
-                            <div>
-                                <span>
-                                    @include('partials._comment_replies', ['comments' => $data->comments, 'post_id' =>
-                                    $data->id])
-                                </span>
-                            </div>
+@if (Auth::check())
+    <form method="post" action="{{ route('comment.add') }}">
+        @csrf
+        <div class="form-group">
+            <input type="text" name="comment_body" class="form-control" placeholder="Write a comment..." required/>
+            <input type="hidden" name="post_id" value="{{ $data->id }}" />
+        </div>
+        <div class="form-group">
+            <input type="submit" class="btn btn-warning" value="Add Comment" />
+        </div>
+    </form>
+@else
+    <p>Please <a href="{{ route('login') }}">login</a> to add a comment.</p>
+@endif
+
+<div class="mt-4">
+    <span>
+        @include('partials._comment_replies', ['comments' => $data->comments, 'post_id' => $data->id])
+    </span>
+</div>
+
+@push('scripts')
+<script>
+    $(document).ready(function() {
+        $('.reply-btn').on('click', function() {
+            $(this).next('.reply-form').toggle();
+        });
+    });
+</script>
+@endpush
+
                         </div>
 
                     </div>
@@ -223,5 +238,6 @@
         </div>
     </div>
 </section>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 @endsection

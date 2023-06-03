@@ -37,6 +37,15 @@
 										<a href="index.html"><img src="{{asset('admin1/images/logo-full.png')}}" alt=""></a>
 									</div>
                                     <h4 class="text-center mb-4">Đăng Nhập Tài Khoản </h4>
+                                    @if (session('status'))
+                                <div class="alert alert-success" role="alert">
+                                    {{ session('status') }}
+                                </div>
+                            @elseif (session('error'))
+                                <div class="alert alert-danger" role="alert">
+                                    {{ session('error') }}
+                                </div>
+                            @endif
                                     <form method="POST" action="{{ route('login') }}">
                         @csrf
 
@@ -87,9 +96,15 @@
                                 </button>
 
                                 @if (Route::has('password.request'))
-                                    <a class="btn btn-link" href="{{ route('password.request') }}">
-                                        {{ __('Forgot Your Password?') }}
-                                    </a>
+                                <div class="form-group row">
+                              <div class="col-md-6 offset-md-4">
+                                  <div class="checkbox">
+                                      <label>
+                                          <a href="{{ route('forget.password.get') }}">Reset Password</a>
+                                      </label>
+                                  </div>
+                              </div>
+                          </div>
                                 @endif
                             </div>
                         </div>
