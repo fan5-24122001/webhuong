@@ -7,7 +7,7 @@
 
 <!-- MAIN CONTENT-->
 <div style="display: flex; justify-content: space-between;">
-    <h2 class="title-5 m-b-35 bg-primary">Danh sách các đơn chưa giao </h2>
+    <h2 class="title-5 m-b-35 bg-primary">Danh sách các đơn </h2>
     <a href="{{ route('admin.addBill')}}"><span class="badge badge-primary"><h4>Thêm</h4></span></a></div>
 <table class="table table-data2">
     <thead>
@@ -18,7 +18,7 @@
             <th>Tổng tiền</th>
             <th>Địa chỉ</th>
             <th>Số Điện thoại</th>
-           
+
             <th>Hành Động</th>
         </tr>
     </thead>
@@ -29,31 +29,31 @@
             <td><b>{{$book->name}}</b></td>
             <td><b class="text-danger">{{$book->email}}</b></td>
             <td><b class="text-warning">{{($book->price)}}</b> vnĐ</td>
-            <td>{{$book->address}}</td>   
-            <td>{{$book->numberPhone}}</td>   
-            <td>{{$book->xa}}</td>   
+            <td>{{$book->address}}</td>
+            <td>{{$book->numberPhone}}</td>
+            <td>{{$book->xa}}</td>
             <td>
                 <div class="table-data-feature">
                     <a  href="{{route('admin.editBill',$book->id)}}" class="item btnEdit" data-toggle="tooltip" data-placement="top" title="Sửa">
                         <i class="zmdi zmdi-edit"></i>
                     </a>
-                   
+
                     <form action="{{route('admin.deleteBill',$book->id)}}" method="POST">
                                         @csrf
                                         @method('delete')
                                         <button type="submit" class="btn btn-outline-danger">   <i  class="zmdi zmdi-delete text-danger"></i></button>
                                     </form>
-                                 
-                   
+
+
                     @if (!empty($book->idUser))
                     <a  href="{{route('admin.sanpham',[$book->id,$book->idUser] )}}" class="item btnView" data-toggle="tooltip" data-placement="top" title="Xem sản phẩm">
                         <i class="zmdi zmdi-shopping-cart text-warning"></i>
                     </a>
                     @endif
-                    <a href="{{route('admin.changeBill',$book->id)}}" class="item btnchage "  data-toggle="tooltip" data-placement="top" title="Đã giao">
+                    <a href="{{route('admin.changeBill',['id'=>$book->id, 'status'=>1])}}" class="item btnchage "  data-toggle="tooltip" data-placement="top" title="Xác nhận đơn và giao hàng">
                         <i class="zmdi zmdi-badge-check text-success"></i>
                     </a>
-                </div> 
+                </div>
             </td>
         </tr>
         <tr class="spacer"></tr>
