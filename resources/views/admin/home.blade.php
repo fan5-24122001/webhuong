@@ -103,7 +103,7 @@
                                         <i class="zmdi zmdi-money"></i>
                                     </div>
                                     <div class="text">
-                                        <h2>{{$bill}} Đơn Xử Lý</h2>
+                                        <h2>{{$bill1}} Đơn Xử Lý</h2>
                                         
                                     </div>
                                 </div>
@@ -121,7 +121,7 @@
                                         <i class="zmdi zmdi-money"></i>
                                     </div>
                                     <div class="text" style="font-size: 15px;">
-                                        <h2 style="font-size: 30px;">{{$bill}} Đơn Đang Xử Lý</h2>
+                                        <h2 style="font-size: 30px;">{{$bill2}} Đơn Đang Giao</h2>
                                         
                                     </div>
                                 </div>
@@ -139,7 +139,7 @@
                                         <i class="zmdi zmdi-money"></i>
                                     </div>
                                     <div class="text" style="font-size: 15px;">
-                                        <h2 style="font-size: 36px;">{{$bill}} Đơn Giao</h2>
+                                        <h2 style="font-size: 36px;">{{$bill3}} Đơn Giao</h2>
                                         
                                     </div>
                                 </div>

@@ -36,8 +36,8 @@ class HomeController extends Controller
             $idUser = Auth::user()->id;
             $cart = Cart::where('idUser', '=', $idUser)->get();
             $data = Product::all();
-            $data1 = DB::table('product')->where('showsp', '1')->get();
-            ;
+
+            $data1 = DB::table('product')->where('showsp','1')->get();
 
             foreach ($cart as $car) {
                 if ($car->idUser == $idUser) {
@@ -91,8 +91,10 @@ class HomeController extends Controller
         ;
         $qlx = NhapXuatKho::where('type', '=', 2)->count();
         ;
-        $bill = Bill::all()->count();
-        return view('admin.home', compact(['pro', 'cate', 'user', 'nv', 'qln', 'qlx', 'bill']));
+        $bill1 = Cart::where('genaral', '=', 1)->count();
+        $bill2 = Cart::where('genaral', '=', 2)->count();
+        $bill3 = Cart::where('genaral', '=', 3)->count();
+        return view('admin.home', compact(['pro', 'cate', 'user', 'nv', 'qln', 'qlx', 'bill1','bill2','bill3']));
     }
 
     public function addcart($idUser, $idProduct)
@@ -124,30 +126,30 @@ class HomeController extends Controller
     }
     public function themcart($idUser, $idProduct)
     {
-        $cardData = Cart::all();
-        //dd($cardData);
-        foreach ($cardData as $key => $card) {
-            $empryData = ($card->idProduct == $idProduct) && ($card->idUser == $idUser) && ($card->amount >= 1);
-            //dd($k);
-            if ($empryData == true) {
-                $cardRowUpdate = Cart::find($card->id);
-                $cardRowUpdate->amount = $card->amount + 1;
-                $cardRowUpdate->save();
-                return redirect()->route('home.cartUser', Auth::user()->id)->with('success', 'Đã thêm thành công');
-            }
-        }
-        if (
-            Cart::create([
-                'idUser' => $idUser,
-                'idProduct' => $idProduct,
-                'genaral' => 1,
-                'amount' => 1
-            ])
-        ) {
+        // dd(123);
+        $cart = Cart::where('idProduct', $idProduct)->where('genaral', 1)->first();
+        // dd($cart);
+        if ( !empty($cart) ) {
+            
+            $cart->amount =  $cart->amount  + 1;
+            $cart->save();
             return redirect()->route('home')->with('success', 'Successfully add card ');
         } else {
-            return redirect()->route('home')->with('error', 'error add card ');
+            if (
+                Cart::create([
+                    'idUser' => $idUser,
+                    'idProduct' => $idProduct,
+                    'genaral' => 1,
+                    'amount' => 1
+                ])
+            ) {
+                return redirect()->route('home')->with('success', 'Successfully add card ');
+            } else {
+                return redirect()->route('home')->with('error', 'error add card ');
+            }
         }
+        
+        
     }
     public function trucart($idUser, $idProduct)
     {
@@ -387,8 +389,33 @@ class HomeController extends Controller
         $amount = 0;
         $total = 0;
         $idUser = Auth::user()->id;
-        $bill = Bill::where('idUser', '=', $idUser)->get();
-        return view('users.pages.order.checkoder', compact('total', 'bill'));
+        $bill1 = Bill::where('idUser', '=', $idUser)->where('genaral', 0)->get();
+        $bill2 = Bill::where('idUser', '=', $idUser)->where('genaral', 1)->get();
+        $bill3 = Bill::where('idUser', '=', $idUser)->where('genaral', 2)->get();
+        $carts1 = [];
+        $carts2 = [];
+        $carts3 = [];
+        foreach ($bill1 as $key => $bil) {
+            $cart = DB::table('cart')->whereIn('cart.id', explode(',', $bil->idCart))
+            ->join('product', 'product.id', '=', 'cart.idProduct')->
+            select('cart.*', 'product.name', 'product.price', 'product.image', 'product.description')->get();
+            array_push($carts1, $cart);
+        }
+        $carts2 = [];
+        foreach ($bill2 as $key => $bil) {
+            $cart = DB::table('cart')->whereIn('cart.id', explode(',', $bil->idCart))
+            ->join('product', 'product.id', '=', 'cart.idProduct')->
+            select('cart.*', 'product.name', 'product.price', 'product.image', 'product.description')->get();
+            array_push($carts2, $cart);
+        }
+        $carts3 = [];
+        foreach ($bill3 as $key => $bil) {
+            $cart = DB::table('cart')->whereIn('cart.id', explode(',', $bil->idCart))
+            ->join('product', 'product.id', '=', 'cart.idProduct')->
+            select('cart.*', 'product.name', 'product.price', 'product.image', 'product.description')->get();
+            array_push($carts3, $cart);
+        }
+        return view('users.pages.order.checkoder', compact( 'total', 'carts1', 'carts2', 'carts3'));
     }
 
     public function changePassword()

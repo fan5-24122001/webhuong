@@ -18,6 +18,7 @@
                                     <th>Loại</th>
                                     <th>Số lượng</th>
                                     <th>Tên sp Nhập</th>
+                                    <th>Tổng Tiền</th>
                                     <th>Hành động</th>
 
                                 </tr>
@@ -36,9 +37,10 @@
                                         @else
                                      
                                         @endif
+
                                         @endforeach
 
-                                   
+                                     <td>${{ number_format($NhapXuat->amount * $NhapXuat->price)}}</td>
                                     <td>
                                         <div class="table-data-feature">
                                             <a  href="{{route('NhapXuatKho.edit',$NhapXuat->id)}}" class="item btnEdit" data-toggle="tooltip" data-placement="top" title="Edit">

@@ -43,7 +43,7 @@ class ProductController extends Controller
         $product->name = $request->name;
         $product->id_category = $request->id_category;
         $product->amount = 0;
-        $product->description = $request->description;
+        $product->description = $request->description1;
         $product->price = $request->price;
         if (!empty($arrayImgae)) {
             $product->image = substr_replace($arrayImgae, "", -1);
@@ -65,7 +65,7 @@ class ProductController extends Controller
         $product->name = $request->name;
         $product->id_category = $request->id_category;
         $product->amount = $request->amount;
-        $product->description = $request->description;
+        $product->description = $request->description1;
         $product->price = $request->price;
         $product->showsp = $request->showsp;
         if ($request->has('image')) {

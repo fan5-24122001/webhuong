@@ -96,15 +96,9 @@
                                 </button>
 
                                 @if (Route::has('password.request'))
-                                <div class="form-group row">
-                              <div class="col-md-6 offset-md-4">
-                                  <div class="checkbox">
-                                      <label>
-                                          <a href="{{ route('forget.password.get') }}">Reset Password</a>
-                                      </label>
-                                  </div>
-                              </div>
-                          </div>
+                                    <a class="btn btn-link" href="{{ route('forget.password.get') }}">
+                                        {{ __('Forgot Your Password?') }}
+                                    </a>
                                 @endif
                             </div>
                         </div>

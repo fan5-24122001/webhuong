@@ -30,9 +30,10 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
         $user = User::find($id);
-        $user->is_admin = $request['is_admin'];
+        $user->name = $request['name'];
+        $user->address = $request['address'];   
         $user->save();
-        return redirect()->back()->with('massage', 'Cập nhật thành công');
+        return redirect()->back()->with('success', 'Cập nhật thành công');
     }
     public function Delete(User $id){
         $id->delete();

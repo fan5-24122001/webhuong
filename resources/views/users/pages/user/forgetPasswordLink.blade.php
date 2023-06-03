@@ -1,29 +1,18 @@
-
-
-<!DOCTYPE html>
-<html lang="en" class="h-100">
-
-<head>
-    <meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="keywords" content="admin, dashboard">
-	<meta name="author" content="DexignZone">
-	<meta name="robots" content="index, follow">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="description" content="Dompet : Payment Admin Template">
-	<meta property="og:title" content="Dompet : Payment Admin Template">
-	<meta property="og:description" content="Dompet : Payment Admin Template">
-	<meta property="og:image" content="https://dompet.dexignlab.com/xhtml/social-image.png">
-	<meta name="format-detection" content="telephone=no">
-	
-	<!-- PAGE TITLE HERE -->
-	<title>Đăng Nhập Tài Khoản</title>
-	
-	<!-- FAVICONS ICON -->
-	<link rel="shortcut icon" type="image/png" href="{{asset('admin/images/favicon.png')}}">
-    <link href="{{asset('admin1/css/style.css')}}" rel="stylesheet">
-
-</head>
+@extends('users.master')
+@section('content') 
+<div class="breadcrumb-option">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="breadcrumb__links">
+                    <a href="./index.html"><i class="fa fa-home"></i> Home</a>
+                    <span>Reset Password</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<section style="margin-bottom:200px;">
 <main class="login-form">
   <div class="cotainer">
       <div class="row justify-content-center">
@@ -79,3 +68,5 @@
       </div>
   </div>
 </main>
+</section>
+@endsection

@@ -78,7 +78,7 @@
                         
                         </div>
                         <button type="submit" class="btn btn-primary"  style="margin: 15px">
-                          <i class="fas fa-search"></i>
+                         Search
                         </button>
                       </div>
                  

@@ -29,7 +29,7 @@
     <link href="admin/vendor/slick/slick.css" rel="stylesheet" media="all">
     <link href="admin/vendor/select2/select2.min.css" rel="stylesheet" media="all">
     <link href="admin/vendor/perfect-scrollbar/perfect-scrollbar.css" rel="stylesheet" media="all">
-
+    <script src="https://cdn.ckeditor.com/4.21.0/standard/ckeditor.js"></script>
     <!-- Main CSS-->
     <link href="admin/css/theme.css" rel="stylesheet" media="all">
 
@@ -129,60 +129,60 @@
 
 
                         @if (Auth::user()->is_admin == 1)
-                        <li>
-                            <a href="{{route('admin.home')}}">
-                                <i class="fas fa-chart-bar"></i>Thống Kê</a>
+                            <li>
+                                <a href="{{ route('admin.home') }}">
+                                    <i class="fas fa-chart-bar"></i>Thống Kê</a>
 
-                        <li>
-                        <li>
-                            <a href="{{route('User.list')}}">
-                                <i class="fas fa-chart-bar"></i>Ql Tk khách hàng hàng</a>
+                            <li>
+                            <li>
+                                <a href="{{ route('User.list') }}">
+                                    <i class="fas fa-chart-bar"></i>Ql Tk khách hàng hàng</a>
 
-                        <li>
-                        <li>
-                            <a href="{{route('User.listNV')}}">
-                                <i class="fas fa-chart-bar"></i>Ql Tk nhân viên</a>
+                            <li>
+                            <li>
+                                <a href="{{ route('User.listNV') }}">
+                                    <i class="fas fa-chart-bar"></i>Ql Tk nhân viên</a>
 
-                        <li>
-                        <li>
-                            <a href="{{route('NhapXuatKho.list')}}">
-                                <i class="fas fa-chart-bar"></i>Quản lý kho</a>
+                            <li>
+                            <li>
+                                <a href="{{ route('NhapXuatKho.list') }}">
+                                    <i class="fas fa-chart-bar"></i>Quản lý kho</a>
 
-                        <li>
+                            <li>
                             @elseif(Auth::user()->is_admin == 2)
                             <li>
-                            <a href="{{route('admin.home')}}">
-                                <i class="fas fa-chart-bar"></i>Thống Kê</a>
+                                <a href="{{ route('admin.home') }}">
+                                    <i class="fas fa-chart-bar"></i>Thống Kê</a>
 
-                        <li>
-                        <li>
-                            <a href="{{route('Product.list')}}">
-                                <i class="fas fa-chart-bar"></i>Sản Phẩm</a>
+                            <li>
+                            <li>
+                                <a href="{{ route('Product.list') }}">
+                                    <i class="fas fa-chart-bar"></i>Sản Phẩm</a>
 
-                        <li>
-                            <a href="{{route('Category.list')}}">
-                                <i class="fas fa-map-marker-alt"></i>Danh Mục</a>
-                        </li>
-                        <li class="has-sub">
-                            <a class="js-arrow" href="#">
-                                <i class="fas fa-copy"></i>Đơn hàng</a>
-                            <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
+                            <li>
+                                <a href="{{ route('Category.list') }}">
+                                    <i class="fas fa-map-marker-alt"></i>Danh Mục</a>
+                            </li>
+                            <li class="has-sub">
+                                <a class="js-arrow" href="#">
+                                    <i class="fas fa-copy"></i>Đơn hàng</a>
+                                <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
                                 <li>
-                                    <a href="{{route('admin.listBill')}}">Danh sách hóa đơn</a>
-                                </li>
-                                <li>
-                                    <a href="{{route('admin.historyBill')}}">Lịch sử hóa đơn</a>
-                                </li>
-
-                            </ul>
+                            <a href="{{ route('admin.listBill', ['genaral' => 0]) }}">Danh sách đơn hiện tại</a>
+                        </li>
+                        <li>
+                            <a href="{{ route('admin.listBill', ['genaral' => 1]) }}">Danh sách đơn đang giao</a>
+                        </li>
+                        <li>
+                            <a href="{{ route('admin.listBill', ['genaral' => 2]) }}">Danh sách đơn đã giao</a>
                         </li>
 
-                           
-                       
+                                </ul>
+                            </li>
                         @endif
 
 
-
+                      
                     </ul>
                 </nav>
             </div>
@@ -198,7 +198,8 @@
                         <div class="header-wrap">
                             <form class="form-header" action="{{ route('admin.search') }}" method="GET">
                                 @csrf
-                                <input class="au-input au-input--xl" type="text" name="search" placeholder="Tìm kiếm sản phẩm ở đây" />
+                                <input class="au-input au-input--xl" type="text" name="search"
+                                    placeholder="Tìm kiếm sản phẩm ở đây" />
                                 <button class="au-btn--submit" type="submit">
                                     <i class="zmdi zmdi-search"></i>
                                 </button>
@@ -214,7 +215,8 @@
                                             </div>
                                             <div class="mess__item">
                                                 <div class="image img-cir img-40">
-                                                    <img src="admin/images/icon/avatar-06.jpg" alt="Michelle Moreno" />
+                                                    <img src="admin/images/icon/avatar-06.jpg"
+                                                        alt="Michelle Moreno" />
                                                 </div>
                                                 <div class="content">
                                                     <h6>Michelle Moreno</h6>
@@ -319,32 +321,36 @@
                                 <div class="account-wrap">
 
                                     @guest
-                                    @if (Route::has('login'))
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                                    </li>
-                                    @endif
-
-
+                                        @if (Route::has('login'))
+                                            <li class="nav-item">
+                                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                            </li>
+                                        @endif
                                     @else
-                                    <li class="dropdown header-profile">
+                                        <li class="dropdown header-profile">
 
-                                        <a href="{{ route('logout') }}" onclick="event.preventDefault();
+                                            <a href="{{ route('logout') }}"
+                                                onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                            <svg id="icon-logout" xmlns="http://www.w3.org/2000/svg" class="text-danger" width="18" height="18" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                                <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
-                                                <polyline points="16 17 21 12 16 7"></polyline>
-                                                <line x1="21" y1="12" x2="9" y2="12"></line>
-                                            </svg>
-                                            <span>
-                                                {{ __('Logout') }}
-                                            </span>
-                                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                                @csrf
-                                            </form>
-                                        </a>
+                                                <svg id="icon-logout" xmlns="http://www.w3.org/2000/svg"
+                                                    class="text-danger" width="18" height="18"
+                                                    viewbox="0 0 24 24" fill="none" stroke="currentColor"
+                                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                    <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                                                    <polyline points="16 17 21 12 16 7"></polyline>
+                                                    <line x1="21" y1="12" x2="9" y2="12">
+                                                    </line>
+                                                </svg>
+                                                <span>
+                                                    {{ __('Logout') }}
+                                                </span>
+                                                <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                                    class="d-none">
+                                                    @csrf
+                                                </form>
+                                            </a>
 
-                                    </li>
+                                        </li>
                                     @endguest
 
 

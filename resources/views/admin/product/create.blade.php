@@ -43,8 +43,10 @@
                                     <label for="text-input" class=" form-control-label">Thông tin chi tiết</label>
                                 </div>
                                 <div class="col-12 col-md-9">
-                                    <textarea id="text-input" name="description" placeholder="Nhập"
-                                        class="form-control"></textarea>
+                                    <textarea name="description1"></textarea>
+                                    
+                                    <!-- <textarea id="text-input" name="description" placeholder="Nhập"
+                                        class="form-control"></textarea> -->
                                     @error('description')
                                         <div class="alert alert-danger">{{ $message }}</div>
                                     @enderror
@@ -95,4 +97,7 @@
             </div>
         </div>
     </div>
+    <script>
+        CKEDITOR.replace( 'description1' );
+    </script>
 @endsection
