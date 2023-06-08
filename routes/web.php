@@ -27,7 +27,7 @@ use App\Http\Controllers\Auth\ForgotPasswordController;
 
 
 Route::get('forget-password', [ForgotPasswordController::class, 'showForgetPasswordForm'])->name('forget.password.get');
-Route::post('forget-password', [ForgotPasswordController::class, 'submitForgetPasswordForm'])->name('forget.password.post'); 
+Route::post('forget-password', [ForgotPasswordController::class, 'submitForgetPasswordForm'])->name('forget.password.post');
 Route::get('reset-password/{token}', [ForgotPasswordController::class, 'showResetPasswordForm'])->name('reset.password.get');
 Route::post('reset-password', [ForgotPasswordController::class, 'submitResetPasswordForm'])->name('reset.password.post');
 Route::get('/change-password', [App\Http\Controllers\HomeController::class, 'changePassword'])->name('change-password');
@@ -58,6 +58,9 @@ Route::group(['prefix' => 'admin'], function () {
     });
     Route::controller(UserController::class)->group(function () {
         Route::get('/list-user', 'list')->name('User.list');
+        Route::get('/list-user-bill/{id_user}', 'listBill')->name('User.listBill');
+        Route::get('/list-user-bill-sp/{id}/{idUser}', 'sanpham')->name('User.sanphambill');
+
         Route::get('/list-nv', 'listNV')->name('User.listNV');
         Route::get('/add', 'create')->name('User.add');
         Route::post('/createuser', 'createuser')->name('User.createuser');

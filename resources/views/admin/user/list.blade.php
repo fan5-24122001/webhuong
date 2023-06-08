@@ -23,7 +23,7 @@
                                 @foreach ($user as $us)
                                 <tr class="tr-shadow">
                                     <td>{{$us->id}}</td>
-                                    <td><b>{{$us->name}}</b></td> 
+                                    <td><b>{{$us->name}}</b></td>
                                     <td>{{$us->email}}</td>
                                     <td>{{$us->address}}</td>
                                     <td>
@@ -31,7 +31,11 @@
                                             <a href="{{route('User.Delete',$us->id)}}" class="item btnDelete"  data-toggle="tooltip" data-placement="top" title="Delete">
                                                 <i  class="zmdi zmdi-delete text-danger"></i>
                                             </a>
-                                        </div> 
+                                            <a href="{{route('User.listBill',$us->id)}}" class="item btnDelete"  data-toggle="tooltip" data-placement="top" title="Danh sách hóa đơn">
+                                                <i class="zmdi zmdi-book-image text-success"></i>
+                                            </a>
+                                        </div>
+
                                     </td>
                                 </tr>
                                 <tr class="spacer"></tr>
