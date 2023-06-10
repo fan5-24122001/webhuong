@@ -108,11 +108,14 @@
                                         <input type="text" value="{{$pro->amount}}" class="form-control">
                                     </div>
                                 </td>
-                                public function deleteProduct(Cart $id)
-    {
-        $id->delete();
-        return redirect()->back()->with('success', 'Đã xóa sản phẩm');
-    }<
+                                <td class="cart__total">  <td class="shoping__cart__item__close">
+                                    <form action="{{ route('deleteProduct', $pro->id) }}" method="POST">
+                                        @csrf
+                                        @method('delete')
+                                        <button type="submit" class="btn btn-outline-danger">Delete</button>
+                                    </form>
+                                 
+                                </td><
                                 
                             </tr>
                             @endforeach
