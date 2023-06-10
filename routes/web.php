@@ -122,6 +122,7 @@ Route::get('/{idUser}/cart',  [App\Http\Controllers\HomeController::class, 'cart
 Route::get('/trucart/{idUser}/{idProduct}', [App\Http\Controllers\HomeController::class, 'trucart'])->name('home.trucart');
 Route::get('/themcart/{idUser}/{idProduct}', [App\Http\Controllers\HomeController::class, 'themcart'])->name('home.themcart');
 Route::DELETE('/deleteproductuser/{id}',[App\Http\Controllers\HomeController::class,'delete'])->name('home.deleteProduct');
+Route::DELETE('/deleteProduct/{id}',[App\Http\Controllers\HomeController::class,'deleteProduct'])->name('deleteProduct');
 Route::get('/thanhtoan',[App\Http\Controllers\HomeController::class, 'pay'])->name('home.pay');
 Route::POST('/postthanhtoan',[App\Http\Controllers\HomeController::class, 'postthanhtoan'])->name('home.postthanhtoan');
 Route::controller(HomeController::class)->group(function () {

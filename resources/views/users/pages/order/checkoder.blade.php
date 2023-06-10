@@ -108,7 +108,11 @@
                                         <input type="text" value="{{$pro->amount}}" class="form-control">
                                     </div>
                                 </td>
-                                <td class="cart__total">$ {{$pro->amount*$pro->price}}vnĐ</td>
+                                public function deleteProduct(Cart $id)
+    {
+        $id->delete();
+        return redirect()->back()->with('success', 'Đã xóa sản phẩm');
+    }<
                                 
                             </tr>
                             @endforeach

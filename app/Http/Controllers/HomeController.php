@@ -418,6 +418,12 @@ class HomeController extends Controller
         return view('users.pages.order.checkoder', compact( 'total', 'carts1', 'carts2', 'carts3'));
     }
 
+    public function deleteProduct(Cart $id)
+    {
+        $id->delete();
+        return redirect()->back()->with('success', 'Đã xóa sản phẩm');
+    }
+
     public function changePassword()
     {
         return view('users.pages.user.change-password');
